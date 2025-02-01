@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.image-container {
+  position: relative;
+  width: 30%;
+  margin-left: 4rem;
+}
+
+.image-container img {
+    width: 15rem;
+}
