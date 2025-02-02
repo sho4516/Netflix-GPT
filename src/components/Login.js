@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Header from "./Header";
 import "../utils/css/form.css";
 import { validate } from "../utils/validator";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +20,40 @@ const Login = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
     const message = validate(email, password);
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (isSignIn) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + "-" + errorMessage);
+          setErrorMessage(errorMessage);
+        });
+    }
   };
   return (
     <div className="relative w-full h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/fb5cb900-0cb6-4728-beb5-579b9af98fdd/web/IN-en-20250127-TRIFECTA-perspective_cf66f5a3-d894-4185-9106-5f45502fc387_large.jpg')] bg-cover bg-center flex flex-column justify-center">
@@ -56,7 +93,7 @@ const Login = () => {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          id="email"
+          id="password"
         />
 
         <p className="text-red-500 mr-auto pl-9 font-bold">{errorMessage}</p>
