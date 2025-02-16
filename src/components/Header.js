@@ -39,9 +39,9 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 w-full flex flex-row z-10 bg-gradient-to-b from-black justify-between align-middle">
-      <div className="relative w-1/3 ml-16">
-        <img className="w-60" src={LOGO} alt="logo" />
+    <div className="fixed top-0 h-20 w-full flex flex-row z-10 bg-gradient-to-b from-black justify-between items-center">
+      <div className="relative w-1/3 ml-16 h-full flex items-center">
+        <img className="relative h-full w-auto" src={LOGO} alt="logo" />
       </div>
       {uid && (
         <div

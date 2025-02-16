@@ -18,6 +18,8 @@
   max-width: 100%; /* Ensure it doesn't exceed the parent's width */
   padding-bottom: 8px; /* Add space for the scrollbar */
   flex-shrink: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Optional: Add styles for the MovieCard component */
@@ -25,3 +27,9 @@
   flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
   width: 150px; /* Set a fixed width for the cards */
 }
+
+::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+

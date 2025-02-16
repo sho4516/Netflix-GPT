@@ -7,7 +7,7 @@ import SecondryContainer from "./SecondryContainer";
 const Browse = () => {
   useNowPlayingMovies();
   return (
-    <div>
+    <div style={{scrollbarWidth: "none"}}>
       <Header />
       <MainContainer />
       <SecondryContainer />

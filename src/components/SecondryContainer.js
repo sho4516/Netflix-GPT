@@ -5,8 +5,19 @@ import { useSelector } from "react-redux";
 const SecondryContainer = () => {
   const movies = useSelector((state) => state.movieReducer.nowPlayingMovies);
   return (
-    <div className="absolute z-20 text-white [bottom:-25%] flex overflow-x-auto">
-      <MovieList title="Now Playing" movies={movies} />
+    <div
+      className="relative z-20 text-white flex flex-col"
+      style={{ marginTop: "40rem" }}
+    >
+      <MovieList
+        title="Now Playing"
+        movies={movies}
+      />
+
+      <MovieList
+        title="Now Playing"
+        movies={movies}
+      />
     </div>
   );
 };
