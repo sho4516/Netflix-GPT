@@ -12,3 +12,5 @@ export const MOVIE_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTc0NTQ2ZjVhNjJmM2NlYjc1NjBhYmJhMDQwZjc0ZiIsIm5iZiI6MTczODc4MDEzNi41ODIsInN1YiI6IjY3YTNhZGU4MmY0NGY4MmFkMzJmYjVhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ftqbEAfg69GBqLtFLBjL1ufG6cDFhA0GBr6uYzuLL_0",
   },
 };
+
+export const IMG_CDN = "https://image.tmdb.org/t/p/w200";

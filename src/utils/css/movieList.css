@@ -1,0 +1,27 @@
+.movie_list {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 8px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.movie_list_cards {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Disable vertical scrolling */
+  max-width: 100%; /* Ensure it doesn't exceed the parent's width */
+  padding-bottom: 8px; /* Add space for the scrollbar */
+  flex-shrink: 0;
+}
+
+/* Optional: Add styles for the MovieCard component */
+.movie_card {
+  flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
+  width: 150px; /* Set a fixed width for the cards */
+}
