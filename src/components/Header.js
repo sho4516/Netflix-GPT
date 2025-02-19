@@ -15,6 +15,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const uid = useSelector((state) => state.userReducer?.uid);
+  const showGptSearch = useSelector((state) => state.gptReducer.showGptSearch);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -63,19 +64,21 @@ const Header = () => {
       {uid && (
         <>
           <div className="flex flex-row items-center w-1/4 justify-start gap-2">
-            <select
-              className="language_options"
-              onChange={handleLanguageChange}
-            >
-              {SUPPORTED_LANGUAGES.map((item) => (
-                <option value={item.identifier}>{item.value}</option>
-              ))}
-            </select>
+            {showGptSearch && (
+              <select
+                className="language_options"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((item) => (
+                  <option value={item.identifier}>{item.value}</option>
+                ))}
+              </select>
+            )}
             <button
               className="gpt-search-button text-white"
               onClick={handleGptSearchClick}
             >
-              GPT Search
+              {showGptSearch ? "Home Page" : "GPT Search"}
             </button>
             <div
               className="relative image-holder cursor-pointer"
