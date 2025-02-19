@@ -1,0 +1,17 @@
+.gpt-search {
+  margin-top: 6rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3;
+  padding-top: 1rem;
+  padding-left: 3rem;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+}

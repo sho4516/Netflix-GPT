@@ -39,3 +39,13 @@
 .close {
   display: none;
 }
+
+.gpt-search-button{
+  border-radius: 5px;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  background-color: purple;
+  margin-right: 1rem;
+}

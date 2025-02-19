@@ -6,6 +6,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { userActions } from "../redux/userReducer";
 import { LOGO, userAvatar } from "../utils/constants";
+import { toggleGptSearchView } from "../redux/gptReducer";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,47 +39,66 @@ const Header = () => {
       });
   };
 
+  const handleMenuClick = () => {
+    setIsOpen((prev) => {
+      return !prev;
+    });
+  };
+
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <div className="fixed top-0 h-20 w-full flex flex-row z-10 bg-gradient-to-b from-black justify-between items-center">
       <div className="relative w-1/3 ml-16 h-full flex items-center">
         <img className="relative h-full w-auto" src={LOGO} alt="logo" />
       </div>
       {uid && (
-        <div
-          className="flex flex-row items-center w-1/6 justify-start gap-2"
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-        >
-          <div className="relative image-holder cursor-pointer">
-            <img src={userAvatar} alt="" />
-            <div
-              className={`absolute w-56 h-auto top-[48px] -right-6 text-center p-4 caret ${
-                isOpen ? "open" : "close"
-              }`}
+        <>
+          <div className="flex flex-row items-center w-1/5 justify-start gap-2">
+            <button
+              className="gpt-search-button text-white"
+              onClick={handleGptSearchClick}
             >
-              <div className="absolute right-[29px] top-[-18px]">
-                <i className="fa-solid fa-caret-up text-white"></i>
-              </div>
-              <p
-                onClick={() => {
-                  handleSignOut();
-                }}
-                className="relative text-white text-center w-full underline"
+              GPT Search
+            </button>
+            <div
+              className="relative image-holder cursor-pointer"
+              onClick={() => {
+                handleMenuClick();
+              }}
+            >
+              <img src={userAvatar} alt="" />
+              <div
+                className={`absolute w-56 h-auto top-[48px] -right-6 text-center p-4 caret ${
+                  isOpen ? "open" : "close"
+                }`}
               >
-                Sign out of Netflix
-              </p>
+                <div className="absolute right-[29px] top-[-18px]">
+                  <i className="fa-solid fa-caret-up text-white"></i>
+                </div>
+                <p
+                  onClick={() => {
+                    handleSignOut();
+                  }}
+                  className="relative text-white text-center w-full underline"
+                >
+                  Sign out of Netflix
+                </p>
+              </div>
+            </div>
+            <div>
+              <span className="text-white cursor-pointer">
+                <i
+                  className={`${
+                    isOpen ? "fa fa-caret-up" : "fa fa-caret-down"
+                  } font-bold text-white`}
+                ></i>
+              </span>
             </div>
           </div>
-          <div>
-            <span className="text-white cursor-pointer">
-              <i
-                className={`${
-                  isOpen ? "fa fa-caret-up" : "fa fa-caret-down"
-                } font-bold text-white`}
-              ></i>
-            </span>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );
