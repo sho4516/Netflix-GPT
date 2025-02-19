@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { userActions } from "../redux/userReducer";
 import { LOGO, userAvatar } from "../utils/constants";
 import { toggleGptSearchView } from "../redux/gptReducer";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../redux/languageReducer";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,10 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
+  const handleLanguageChange = (event) => {
+    dispatch(changeLanguage(event.target.value));
+  };
+
   return (
     <div className="fixed top-0 h-20 w-full flex flex-row z-10 bg-gradient-to-b from-black justify-between items-center">
       <div className="relative w-1/3 ml-16 h-full flex items-center">
@@ -56,7 +62,15 @@ const Header = () => {
       </div>
       {uid && (
         <>
-          <div className="flex flex-row items-center w-1/5 justify-start gap-2">
+          <div className="flex flex-row items-center w-1/4 justify-start gap-2">
+            <select
+              className="language_options"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((item) => (
+                <option value={item.identifier}>{item.value}</option>
+              ))}
+            </select>
             <button
               className="gpt-search-button text-white"
               onClick={handleGptSearchClick}

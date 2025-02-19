@@ -14,3 +14,9 @@ export const MOVIE_OPTIONS = {
 };
 
 export const IMG_CDN = "https://image.tmdb.org/t/p/w200";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", value: "English" },
+  { identifier: "hindi", value: "Hindi" },
+  { identifier: "spanish", value: "Spanish" },
+];
