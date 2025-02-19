@@ -4,7 +4,6 @@ import "../utils/css/movieList.css";
 
 const MovieList = ({ title, movies }) => {
   console.log(movies);
-  console.log(title);
   return (
     <div className="movie_list">
       <div>
