@@ -5,7 +5,9 @@
   flex-direction: column;
   gap: 3;
   padding-top: 1rem;
+  padding-bottom: 1rem;
   padding-left: 3rem;
+  width: 100%;
 }
 
 .search-form {
