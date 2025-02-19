@@ -6,7 +6,7 @@ const SecondryContainer = () => {
   const movies = useSelector((state) => state.movieReducer);
   return (
     <div
-      className="relative z-20 text-white flex flex-col"
+      className="relative text-white flex flex-col"
       style={{ marginTop: "40rem" }}
     >
       <MovieList title="Now Playing" movies={movies?.nowPlayingMovies} />

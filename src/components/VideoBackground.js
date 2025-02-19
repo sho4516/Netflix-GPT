@@ -32,7 +32,7 @@ const VideoBackground = ({ id }) => {
   }, []);
 
   return (
-    <div className="absolute top-0 w-screen">
+    <div className="absolute top-0 w-screen z-1">
       <iframe
         className="w-screen max-w-full aspect-video"
         src={`https://www.youtube.com/embed/${trailerVideo?.key}?&autoplay=1&mute=1`}
