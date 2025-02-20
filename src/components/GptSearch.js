@@ -1,26 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../utils/css/gptSearch.css";
 import lang from "../utils/lang";
 import { useSelector } from "react-redux";
 import openai from "./openai";
+import useSearchMoviesByTitle from "../hooks/useSearchMovieDetailsFromMovieArrayNames";
+import useSearchMovieDetailsFromMovieArrayNames from "../hooks/useSearchMovieDetailsFromMovieArrayNames";
 
 const GptSearch = () => {
   const langKey = useSelector((state) => state.languageReducer.language);
   const searchText = useRef(null);
+  const [movieNamesArray, setMovieNamesArray] = useState([]);
+
+  useSearchMovieDetailsFromMovieArrayNames(movieNamesArray);
 
   const handleGptSearchClick = async () => {
     console.log(searchText.current.value);
     const gptQuery =
       "Act as a movie recommendation system and give results for following query " +
       searchText.current.value +
-      ". Give 5 movie names, comma separated like ahead example. Example - Koi mil gaya, Gadar, Kal ho na ho, Don, Race. ";
+      ". Give 5 movie names, comma separated like ahead example. Example - Koi mil gaya, Gadar, Kal ho na ho, Don, Race. Make sure that all results must come in one line, without any numbering, just comma separated names.";
 
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
       model: "gpt-3.5-turbo",
     });
 
-    console.log(gptResults);
+    const movieNamesArray = gptResults.choices[0].message.content.split(", ");
+    console.log(movieNamesArray);
+    setMovieNamesArray(movieNamesArray);
   };
 
   return (

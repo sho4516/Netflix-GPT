@@ -18,6 +18,11 @@ const movieSlice = createSlice({
     addUpcomingMovies: (state, action) => {
       state.upcomingMovies = action.payload;
     },
+    addGptMovies: (state, action) => {
+      const { movieNames, movieResults } = action.payload;
+      state.movieNames = movieNames;
+      state.movieResults = movieResults;
+    },
     addMovieTrailer: (state, action) => {
       state.movieTrailer = action.payload;
     },
@@ -30,5 +35,6 @@ export const {
   addPopularMovies,
   addTopRatedMovies,
   addUpcomingMovies,
+  addGptMovies,
   addMovieTrailer,
 } = movieSlice.actions;
