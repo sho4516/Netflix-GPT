@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useSearchMovieDetailsFromMovieArrayNames from "../hooks/useSearchMovieDetailsFromMovieArrayNames";
-import openai from "./openai";
+import openai from "../utils/openai";
 import lang from "../utils/lang";
 import "../utils/css/gptSearch.css";
 
