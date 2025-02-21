@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { MOVIE_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addGptMovies } from "../redux/movieReducer";
+import { toggleGptSearchLoader } from "../redux/appConfigReducer";
 
 const useSearchMovieDetailsFromMovieArrayNames = (movieArray) => {
   const dispatch = useDispatch();
@@ -18,17 +19,27 @@ const useSearchMovieDetailsFromMovieArrayNames = (movieArray) => {
   };
 
   useEffect(() => {
+    if (movieArray.length === 0) return;
     const fetchMovies = async () => {
-      const moviePromises = movieArray.map((movie) => searchMovie(movie));
-      const movieData = await Promise.all(moviePromises);
-      console.log(movieData);
-      dispatch(
-        addGptMovies({ movieNames: movieArray, movieResults: movieData })
-      );
+      try {
+        const moviePromises = movieArray.map((movie) => searchMovie(movie));
+        const movieData = await Promise.all(moviePromises);
+
+        dispatch(
+          addGptMovies({ movieNames: movieArray, movieResults: movieData })
+        );
+      } catch (error) {
+        console.log(
+          "Error in fetching GPT search movie details from TMDB",
+          error
+        );
+      } finally {
+        dispatch(toggleGptSearchLoader());
+      }
     };
-    if (movieArray.length == 0) return;
+
     fetchMovies();
-  }, [movieArray]);
+  }, [movieArray, dispatch]);
 };
 
 export default useSearchMovieDetailsFromMovieArrayNames;

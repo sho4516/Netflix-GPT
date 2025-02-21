@@ -1,19 +1,25 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useSearchMovieDetailsFromMovieArrayNames from "../hooks/useSearchMovieDetailsFromMovieArrayNames";
 import openai from "../utils/openai";
 import lang from "../utils/lang";
 import "../utils/css/gptSearch.css";
+import { toggleGptSearchLoader } from "../redux/appConfigReducer";
+import { FaSpinner } from "react-icons/fa";
 
 const GptSearchBar = () => {
+  const dispatch = useDispatch();
   const langKey = useSelector((state) => state.languageReducer.language);
+  const { isGptSearchLoading } = useSelector((state) => state.appReducer);
+
   const searchText = useRef(null);
+
   const [movieNamesArray, setMovieNamesArray] = useState([]);
 
   useSearchMovieDetailsFromMovieArrayNames(movieNamesArray);
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
+    dispatch(toggleGptSearchLoader());
     const gptQuery =
       "Act as a movie recommendation system and give results for following query " +
       searchText.current.value +
@@ -25,7 +31,6 @@ const GptSearchBar = () => {
     });
 
     const movieNamesArray = gptResults.choices[0].message.content.split(", ");
-    console.log(movieNamesArray);
     setMovieNamesArray(movieNamesArray);
   };
   return (
@@ -38,10 +43,16 @@ const GptSearchBar = () => {
           placeholder={lang[langKey].searchPlaceholderText}
         />
         <button
-          className="rounded-lg bg-red-500 px-4 py-2 text-white"
+          className="rounded-lg bg-red-500 px-4 py-2 text-white w-auto flex items-center justify-center"
           onClick={handleGptSearchClick}
         >
-          {lang[langKey].search}
+          {isGptSearchLoading ? (
+            <>
+              <FaSpinner className="animate-spin mr-2" /> Loading...
+            </>
+          ) : (
+            lang[langKey].search
+          )}
         </button>
       </form>
     </div>
