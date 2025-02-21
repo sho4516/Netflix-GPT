@@ -1,0 +1,13 @@
+.gpt-suggestions {
+  display: flex;
+  z-index: 1;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  height: auto;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-weight: bolder;
+}
