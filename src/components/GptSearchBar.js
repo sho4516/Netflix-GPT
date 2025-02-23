@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useSearchMovieDetailsFromMovieArrayNames from "../hooks/useSearchMovieDetailsFromMovieArrayNames";
-import openai from "../utils/openai";
 import lang from "../utils/lang";
 import "../utils/css/gptSearch.css";
 import { toggleGptSearchLoader } from "../redux/appConfigReducer";
 import { FaSpinner } from "react-icons/fa";
+import { getOpenAI } from "../utils/openai";
 
 const GptSearchBar = () => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const GptSearchBar = () => {
 
   const handleGptSearchClick = async () => {
     dispatch(toggleGptSearchLoader());
+    const openai = await getOpenAI();
     const gptQuery =
       "Act as a movie recommendation system and give results for following query " +
       searchText.current.value +

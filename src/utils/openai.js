@@ -1,9 +1,17 @@
 import OpenAI from "openai";
-import { OPENAPI_KEY } from "./constants";
+import { fetchApiKey } from "./config";
 
-const openai = new OpenAI({
-  apiKey: OPENAPI_KEY,
-  dangerouslyAllowBrowser: true, // This is the default and can be omitted
-});
+let openaiInstance = null;
 
-export default openai;
+export const getOpenAI = async () => {
+  if (!openaiInstance) {
+    const apiKey = await fetchApiKey();
+    if (!apiKey) throw new Error("Failed to fetch OpenAI API key.");
+
+    openaiInstance = new OpenAI({
+      apiKey: apiKey,
+      dangerouslyAllowBrowser: true,
+    });
+  }
+  return openaiInstance;
+};
