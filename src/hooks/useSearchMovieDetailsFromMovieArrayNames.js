@@ -11,7 +11,6 @@ const useSearchMovieDetailsFromMovieArrayNames = (movieArray) => {
       "https://api.themoviedb.org/3/search/movie?query=" +
       title +
       "&include_adult=false&language=en-US&page=1";
-    console.log(url);
 
     const movieresult = await fetch(url, MOVIE_OPTIONS);
     const json = await movieresult.json();

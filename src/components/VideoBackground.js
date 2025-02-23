@@ -6,10 +6,8 @@ import { addMovieTrailer } from "../redux/movieReducer";
 const VideoBackground = ({ id }) => {
   const dispatch = useDispatch();
   const trailerVideo = useSelector((state) => state.movieReducer?.movieTrailer);
-  console.log(trailerVideo);
 
   const fetchMovieVideos = async () => {
-    console.log("hello");
     const data = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
       MOVIE_OPTIONS
@@ -21,8 +19,6 @@ const VideoBackground = ({ id }) => {
     );
     const trailer =
       trailerObject.length > 0 ? trailerObject[0] : result.results[0];
-
-    console.log("hello" + trailer);
 
     dispatch(addMovieTrailer(trailer));
   };
